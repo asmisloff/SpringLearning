@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Add product</title>
+</head>
+<body>
+    <h1>Добавить товар</h1>
+
+    <form th:action="@{/products/add_product}" method="post">
+        <input type="text" name="name" placeholder="Наименование"/>
+        <input type="text" name="description" placeholder="Описание"/>
+        <input type="text" name="brand" placeholder="Бренд"/>
+        <input type="text" name="price" placeholder="Цена"/>
+        <input type="submit" />
+    </form>
+
+    <a th:href="@{/}">На главную</a>
+</body>
+</html>

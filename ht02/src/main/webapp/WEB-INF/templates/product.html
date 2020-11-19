@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Spring MVC GeekApp</title>
+</head>
+
+<body>
+<h1>Данные товара</h1>
+<!--/*@thymesVar id="customer" type="com.geekbrains.spring.mvc.model.Customer"*/-->
+<table border="1" cellspacing="3">
+    <tr>
+        <td style="margin: 10px;">ID</td> <td th:text="${product.id}"></td> </tr>
+    <tr>
+        <td>Наименование</td> <td th:text="${product.name}"></td> </tr>
+    <tr>
+        <td>Описание</td> <td th:text="${product.description}"></td> </tr>
+    <tr>
+        <td>Бренд</td> <td th:text="${product.brand}"></td> </tr>
+    <tr>
+        <td>Цена</td> <td th:text="${product.price}"></td> </tr>
+
+</table>
+
+<a th:href="@{'/products/edit_product/' + ${product.id}}">Редактировать</a>
+<br>
+<a th:href="@{/}">На главную</a>
+</body>
+</html>
