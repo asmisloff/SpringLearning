@@ -29,6 +29,10 @@ public class Product {
     @Version
     long version;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    Category category;
+
     public Product() {
     }
 
@@ -80,6 +84,18 @@ public class Product {
 
     public long getVersion() {
         return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
