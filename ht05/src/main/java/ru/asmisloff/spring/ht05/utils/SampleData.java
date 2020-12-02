@@ -9,6 +9,10 @@ import ru.asmisloff.spring.ht05.repositories.ProductRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class SampleData {
@@ -26,44 +30,37 @@ public class SampleData {
     @PostConstruct
     public void init() {
 
-        Product product1 = new Product("Orange", 50);
-        Product product2 = new Product("Lemon", 70);
-        Product product3 = new Product("Lime", 20);
-        Product product4 = new Product("Mango", 110);
-        Product product5 = new Product("Apple", 95);
-        Product product6 = new Product("Pineapple", 76);
-        Product product7 = new Product("Avocado", 123);
-        Product product8 = new Product("Chicken", 123);
+        List<Product> products = Stream.of(
+                new Product("Orange", 50),
+                new Product("Lemon", 70),
+                new Product("Lime", 20),
+                new Product("Mango", 110),
+                new Product("Apple", 95),
+                new Product("Pineapple", 76),
+                new Product("Avocado", 123),
+                new Product("Chicken", 123)
+        ).collect(Collectors.toList());
+        productRepository.saveAll(products);
 
-        Customer customer1 = new Customer("Alex");
-        Customer customer2 = new Customer("Alena");
+        List<Customer> customers = Stream.of(
+                new Customer("Alex"),
+                new Customer("Alena"),
+                new Customer("Ivan"),
+                new Customer("Mary Vanna")
+        ).collect(Collectors.toList());
+        customerRepository.saveAll(customers);
 
-        Order order1 = new Order();
-        order1.setCurrentPrice(product1.getPrice());
-        order1.setCustomer(customer1);
-        order1.setProduct(product1);
-        order1.setCode("0001");
-
-        Order order2 = new Order();
-        order2.setCurrentPrice(product2.getPrice());
-        order2.setCustomer(customer2);
-        order2.setProduct(product2);
-        order2.setCode("0002");
-
-        productRepository.save(product1);
-        productRepository.save(product2);
-        productRepository.save(product3);
-        productRepository.save(product4);
-        productRepository.save(product5);
-        productRepository.save(product6);
-        productRepository.save(product7);
-        productRepository.save(product8);
-
-        customerRepository.save(customer1);
-        customerRepository.save(customer2);
-
-        orderRepository.save(order1);
-        orderRepository.save(order2);
-
+        for (int i = 0; i < 10; ++i) {
+            Order order = new Order();
+            int prodNumber = ThreadLocalRandom.current().nextInt(products.size());
+            int custNumber = ThreadLocalRandom.current().nextInt(customers.size());
+            Product product = products.get(prodNumber);
+            Customer customer = customers.get(custNumber);
+            order.setCurrentPrice(product.getPrice());
+            order.setCustomer(customer);
+            order.setProduct(product);
+            order.setCode(String.format("%04d", i));
+            orderRepository.save(order);
+        }
     }
 }
