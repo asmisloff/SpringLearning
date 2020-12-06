@@ -34,6 +34,10 @@ public class Product {
     @Column(name = "modify_date")
     private Date modifyDate;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     public Product() {
     }
 
@@ -80,6 +84,14 @@ public class Product {
 
     public void setModifyDate(Date modifyDate) {
         this.modifyDate = modifyDate;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
