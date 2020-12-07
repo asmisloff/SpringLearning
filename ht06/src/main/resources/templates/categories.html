@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Категории товаров</title>
+    <th:block th:replace="~{fragments/resources :: head/link}"></th:block>
+    <th:block th:replace="~{fragments/resources :: head/script}"></th:block>
+</head>
+<body>
+
+    <div class="container">
+
+        <div th:replace="~{fragments/navigation :: navigation(Categories)}" />
+        <h1>Каталог</h1>
+        <br/>
+
+        <table class="table table-hover">
+            <thead class="thead-dark">
+<!--            <tr>-->
+<!--                <th>Категория товаров</th>-->
+<!--                <th>Количество наименований товаров</th>-->
+<!--            </tr>-->
+            </thead>
+            <tbody>
+                <tr th:each="c : ${categories}">
+                    <td align="center">
+                        <img th:src="@{/img/categories_tmb/} + ${c.name} + '.jpg'" height="60px"/>
+                    </td>
+                    <td align="left">
+                        <a th:href="@{'/categories/' + ${c.name}}" th:text="${c.title}"> Одежда </a>
+                    </td>
+                    <td align="right" th:text="${c.numberOfProducts} + ' наименований товаров'"> 100 </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>

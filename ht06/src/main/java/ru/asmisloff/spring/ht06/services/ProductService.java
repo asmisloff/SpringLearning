@@ -30,6 +30,10 @@ public class ProductService {
         return productRepository.findAll(spec, PageRequest.of(page, size));
     }
 
+    public Page<Product> findAllByCategoryId(Long categoryId, int page, int size) {
+        return productRepository.findAllByCategoryId(categoryId, PageRequest.of(page, size));
+    }
+
     public Product addProduct(Product product) {
         return productRepository.save(product);
     }
