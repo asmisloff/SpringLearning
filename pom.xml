@@ -16,6 +16,7 @@
         <module>ht05</module>
         <module>ht06</module>
         <module>ht07</module>
+        <module>ht08</module>
     </modules>
 
     <build>
